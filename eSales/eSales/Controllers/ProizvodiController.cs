@@ -1,4 +1,4 @@
-﻿using eSales.Model;
+﻿using eSales.Services.Database;
 using eSales.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,8 +17,8 @@ namespace eSales.Controllers
             this.proizvodiService = proizvodiService;
         }
 
-        [HttpGet]
-        public IEnumerable<Proizvodi> Get()
+        [HttpGet()]
+        public IEnumerable<Model.Proizvodi> Get()
         {
             return proizvodiService.Get();
         }

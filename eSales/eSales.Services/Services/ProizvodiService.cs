@@ -1,27 +1,25 @@
-﻿using eSales.Model;
+﻿using AutoMapper;
+using eSales.Services.Database;
 using eSales.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace eSales.Services.Services
 {
     public class ProizvodiService : IProizvodiService
     {
-        List<Proizvodi> proizvodi = new List<Proizvodi>()
-        {
-            new Proizvodi()
-            {
-                ProizvodId = 1,
-                Naziv = "Laptop"
-            }
-        };
+        private EProdajaContext context { get; set; }
+        public IMapper mapper { get; set; }
 
-        public IList<Proizvodi> Get()
+        public ProizvodiService(EProdajaContext context, IMapper mapper)
         {
-            return proizvodi;
+            this.context = context;
+            this.mapper = mapper;
+        }
+
+        public List<Model.Proizvodi> Get()
+        {
+            var entityList = context.Proizvodis.ToList();
+            return mapper.Map<List<Model.Proizvodi>>(entityList);
         }
     }
 }

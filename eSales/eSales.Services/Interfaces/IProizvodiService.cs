@@ -1,9 +1,9 @@
-﻿using eSales.Model;
+﻿using eSales.Services.Database;
 
 namespace eSales.Services.Interfaces
 {
     public interface IProizvodiService
     {
-        IList<Proizvodi> Get();
+        List<Model.Proizvodi> Get();
     }
 }
