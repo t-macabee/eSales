@@ -18,9 +18,9 @@ namespace eSales.Controllers
         }
 
         [HttpGet()]
-        public IEnumerable<Model.Korisnici> Get()
+        public async Task<IEnumerable<Model.Korisnici>> Get()
         {
-            return korisniciService.Get();
+            return await korisniciService.Get();
         }
 
         [HttpPost]

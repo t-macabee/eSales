@@ -2,6 +2,7 @@
 using eSales.Model.Requests.Korisnici;
 using eSales.Services.Database;
 using eSales.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -18,9 +19,9 @@ namespace eSales.Services.Services
             this.mapper = mapper;
         }
 
-        public List<Model.Korisnici> Get()
+        public async Task<List<Model.Korisnici>> Get()
         {
-            var entityList = context.Korisnicis.ToList();
+            var entityList = await context.Korisnicis.ToListAsync();
             return mapper.Map<List<Model.Korisnici>>(entityList);
         }       
 

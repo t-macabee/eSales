@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eSales.Services.Database;
 using eSales.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace eSales.Services.Services
@@ -16,9 +17,9 @@ namespace eSales.Services.Services
             this.mapper = mapper;
         }
 
-        public List<Model.Proizvodi> Get()
+        public async Task<List<Model.Proizvodi>> Get()
         {
-            var entityList = context.Proizvodis.ToList();
+            var entityList = await context.Proizvodis.ToListAsync();
             return mapper.Map<List<Model.Proizvodi>>(entityList);
         }
     }

@@ -4,6 +4,6 @@ namespace eSales.Services.Interfaces
 {
     public interface IProizvodiService
     {
-        List<Model.Proizvodi> Get();
+       Task<List<Model.Proizvodi>> Get();
     }
 }

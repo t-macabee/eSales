@@ -18,9 +18,9 @@ namespace eSales.Controllers
         }
 
         [HttpGet()]
-        public IEnumerable<Model.Proizvodi> Get()
+        public async Task<IEnumerable<Model.Proizvodi>> Get()
         {
-            return proizvodiService.Get();
+            return await proizvodiService.Get();
         }
     }
 }
