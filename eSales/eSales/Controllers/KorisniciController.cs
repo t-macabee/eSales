@@ -1,4 +1,6 @@
-﻿using eSales.Model.Requests.Korisnici;
+﻿using eSales.Model;
+using eSales.Model.Requests.Korisnici;
+using eSales.Model.SearchObjects;
 using eSales.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,33 +8,10 @@ namespace eSales.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class KorisniciController : ControllerBase
+    public class KorisniciController : BaseCRUDController<Model.Korisnici, KorisniciSearchObject, KorisniciInsertRequest, KorisniciUpdateRequest>
     {
-        private ILogger<KorisniciController> logger;
-        private IKorisniciService korisniciService;
-
-        public KorisniciController(ILogger<KorisniciController> logger, IKorisniciService korisniciService)
+        public KorisniciController(ILogger<BaseController<Korisnici, KorisniciSearchObject>> logger, IKorisniciService service) : base(logger, service)
         {
-            this.logger = logger;
-            this.korisniciService = korisniciService;
-        }
-
-        [HttpGet()]
-        public async Task<IEnumerable<Model.Korisnici>> Get()
-        {
-            return await korisniciService.Get();
-        }
-
-        [HttpPost]
-        public Model.Korisnici Insert(KorisniciInsertRequest request)
-        {
-            return korisniciService.Insert(request);
-        }
-
-        [HttpPut("{id}")]
-        public Model.Korisnici Update(int id, KorisniciUpdateRequest request)
-        {
-            return korisniciService.Update(id, request);
         }
     }
 }

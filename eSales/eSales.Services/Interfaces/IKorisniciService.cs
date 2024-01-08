@@ -2,10 +2,7 @@
 
 namespace eSales.Services.Interfaces
 {
-    public interface IKorisniciService
+    public interface IKorisniciService : ICRUDService<Model.Korisnici, Model.SearchObjects.KorisniciSearchObject, KorisniciInsertRequest, KorisniciUpdateRequest>
     {
-        Task<List<Model.Korisnici>> Get();
-        Model.Korisnici Insert(KorisniciInsertRequest request);
-        Model.Korisnici Update(int id, KorisniciUpdateRequest request);
     }
 }

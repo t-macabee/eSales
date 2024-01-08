@@ -26,6 +26,8 @@ namespace eSales.Services.Services
 
             query = AddFilter(query, search);
 
+            query = AddInclude(query, search);
+
             result.Count = await query.CountAsync();
 
             if (search?.Page.HasValue == true && search?.PageSize.HasValue == true)
@@ -45,6 +47,11 @@ namespace eSales.Services.Services
             var entity = await context.Set<TDb>().FindAsync(id);
 
             return mapper.Map<T>(entity);
+        }
+
+        public virtual IQueryable<TDb> AddInclude(IQueryable<TDb> query, TSearch? search = null)
+        {
+            return query;
         }
 
         public virtual IQueryable<TDb> AddFilter(IQueryable<TDb> query, TSearch? search = null) 

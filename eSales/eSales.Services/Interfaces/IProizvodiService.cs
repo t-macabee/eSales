@@ -1,9 +1,13 @@
-﻿using eSales.Services.Database;
+﻿using eSales.Model;
+using eSales.Model.Requests.Proizvodi;
+using eSales.Model.SearchObjects;
+using eSales.Services.Database;
+using eSales.Services.Services;
 
 namespace eSales.Services.Interfaces
 {
-    public interface IProizvodiService
+    public interface IProizvodiService : ICRUDService<Model.Proizvodi, ProizvodiSearchObject, ProizvodiInsertRequest, ProizvodiUpdateRequest>
     {
-       Task<List<Model.Proizvodi>> Get();
+        Task<Model.Proizvodi> Activate(int id);
     }
 }

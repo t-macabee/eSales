@@ -1,4 +1,6 @@
-﻿using eSales.Services.Database;
+﻿ using eSales.Model.Requests.Proizvodi;
+using eSales.Model.SearchObjects;
+using eSales.Services.Database;
 using eSales.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,21 +8,16 @@ namespace eSales.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProizvodiController : ControllerBase
+    public class ProizvodiController : BaseCRUDController<Model.Proizvodi, ProizvodiSearchObject, ProizvodiInsertRequest, ProizvodiUpdateRequest>
     {
-        private ILogger<ProizvodiController> logger;
-        private IProizvodiService proizvodiService;
-
-        public ProizvodiController(ILogger<ProizvodiController> logger, IProizvodiService proizvodiService)
+        public ProizvodiController(ILogger<BaseController<Model.Proizvodi, ProizvodiSearchObject>> logger, IProizvodiService service) : base(logger, service)
         {
-            this.logger = logger;
-            this.proizvodiService = proizvodiService;
         }
 
-        [HttpGet()]
-        public async Task<IEnumerable<Model.Proizvodi>> Get()
+        [HttpPut("{id}/activate")]
+        public async Task<Model.Proizvodi> Activate(int id)
         {
-            return await proizvodiService.Get();
+            return await (service as IProizvodiService).Activate(id);
         }
     }
 }

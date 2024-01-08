@@ -6,8 +6,8 @@ namespace eSales.Controllers
 {
     public class BaseController<T, TSearch> : ControllerBase where T : class where TSearch : class
     {
-        private ILogger<BaseController<T, TSearch>> logger;
-        private IService<T, TSearch> service;
+        protected ILogger<BaseController<T, TSearch>> logger;
+        protected IService<T, TSearch> service;
 
         public BaseController(ILogger<BaseController<T, TSearch>> logger, IService<T, TSearch> service)
         {
