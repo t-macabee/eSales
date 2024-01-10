@@ -30,5 +30,14 @@ namespace eSales.Services.ProizvodiStateMachine
 
             return mapper.Map<Proizvodi>(entity);
         }
+
+        public override async Task<List<string>> AllowedActions()
+        {
+            var list = await base.AllowedActions();
+
+            list.Add("Insert");
+
+            return list;
+        }
     }
 }

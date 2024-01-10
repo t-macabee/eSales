@@ -9,5 +9,7 @@ namespace eSales.Services.Interfaces
     public interface IProizvodiService : ICRUDService<Model.Proizvodi, ProizvodiSearchObject, ProizvodiInsertRequest, ProizvodiUpdateRequest>
     {
         Task<Model.Proizvodi> Activate(int id);
+        Task<Model.Proizvodi> Hide(int id);
+        Task<List<string>> AllowedActions(int id);
     }
 }

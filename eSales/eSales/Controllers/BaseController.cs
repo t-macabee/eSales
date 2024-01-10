@@ -1,5 +1,6 @@
 ﻿using eSales.Model;
 using eSales.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eSales.Controllers
