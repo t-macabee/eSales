@@ -1,5 +1,6 @@
 ﻿using eSales.Model;
 using eSales.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eSales.Controllers
@@ -18,6 +19,7 @@ namespace eSales.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public virtual async Task<T> Insert([FromBody]TInsert insert)
         {
             return await service.Insert(insert);

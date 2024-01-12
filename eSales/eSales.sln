@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eSales", "eSales\eSales.csproj", "{C18CF0EE-E705-4B61-ABAB-D8E69EBF4DA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eSales", "eSales\eSales.csproj", "{C18CF0EE-E705-4B61-ABAB-D8E69EBF4DA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eSales.Model", "eSales.Model\eSales.Model.csproj", "{CE2CFBA2-5686-4B49-8FCA-D42FD7E05736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eSales.Model", "eSales.Model\eSales.Model.csproj", "{CE2CFBA2-5686-4B49-8FCA-D42FD7E05736}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eSales.Services", "eSales.Services\eSales.Services.csproj", "{C8240251-D6B1-4595-9FDF-9F9A4B60B646}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eSales.Services", "eSales.Services\eSales.Services.csproj", "{C8240251-D6B1-4595-9FDF-9F9A4B60B646}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eSales.Subscriber", "eSales.Subscriber\eSales.Subscriber.csproj", "{667D66CF-2920-4B78-B906-8A1BAED917E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C8240251-D6B1-4595-9FDF-9F9A4B60B646}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8240251-D6B1-4595-9FDF-9F9A4B60B646}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8240251-D6B1-4595-9FDF-9F9A4B60B646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{667D66CF-2920-4B78-B906-8A1BAED917E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{667D66CF-2920-4B78-B906-8A1BAED917E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{667D66CF-2920-4B78-B906-8A1BAED917E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{667D66CF-2920-4B78-B906-8A1BAED917E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

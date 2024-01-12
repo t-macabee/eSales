@@ -52,5 +52,20 @@ namespace eSales.Services.Services
 
             return Convert.ToBase64String(inArray);
         }
+
+        public async Task<Model.Korisnici> Login(string username, string password)
+        {
+            var entity = await context.Korisnicis.Include("KorisniciUloges.Uloga").FirstOrDefaultAsync(x => x.KorisnickoIme == username);
+            if(entity == null) 
+            {
+                return null;
+            }
+            var hash = GenerateHash(entity.LozinkaSalt, password);
+            if(hash != entity.LozinkaHash)
+            {
+                return null;
+            }
+            return mapper.Map<Model.Korisnici>(entity);
+        }
     }
 }

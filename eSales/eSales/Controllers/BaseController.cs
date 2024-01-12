@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eSales.Controllers
 {
+    [Authorize]
     public class BaseController<T, TSearch> : ControllerBase where T : class where TSearch : class
     {
         protected ILogger<BaseController<T, TSearch>> logger;
