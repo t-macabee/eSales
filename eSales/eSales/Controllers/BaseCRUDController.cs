@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eSales.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
     public class BaseCRUDController<T, TSearch, TInsert, TUpdate> : BaseController<T, TSearch> where TSearch : class where T : class
     {

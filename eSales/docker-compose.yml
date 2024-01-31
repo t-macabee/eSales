@@ -1,0 +1,36 @@
+version: '3'
+services:
+  # mssql docker
+  esales-sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Rey9Ch1vo+
+      - MSSQL_PID=Developer
+    ports:
+      - 1401:1433
+    expose:
+      - 1433
+    networks:
+      - esalesnet2023
+
+  esales-api:
+    restart: unless-stopped
+    build:
+      context: .
+    environment:
+      - ConnectionStrings:DefaultConnection=Server=esales-sql,1433;Database=eSales;User=sa;Password=Rey9Ch1vo+;TrustServerCertificate=True
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 7088:7088
+    networks:
+      - esalesnet2023
+    links:
+      - esales-sql
+    depends_on:
+      - esales-sql
+
+networks:
+  esalesnet2023:
+    driver: bridge

@@ -7,6 +7,7 @@ using eSales.Services.ProizvodiStateMachine;
 using eSales.Services.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,7 +53,9 @@ builder.Services.AddSwaggerGen(c =>
 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<EProdajaContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<EProdajaContext>(options => 
+    options.UseSqlServer(connectionString));
+
 builder.Services.AddAutoMapper(typeof(IKorisniciService));
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
@@ -73,5 +76,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<EProdajaContext>();
+    //dataContext.Database.EnsureCreated();
+    dataContext.Database.Migrate();
+}
 
 app.Run();
