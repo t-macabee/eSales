@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:esales_admin/main.dart';
 import 'package:esales_admin/screens/product_details_screen.dart';
 import 'package:esales_admin/screens/product_list_screen.dart';
@@ -42,7 +44,7 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
               title: Text("Detalji"),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ProductDetailScreen()));
+                    builder: (context) => ProductDetailScreen()));
               },
             )
           ],

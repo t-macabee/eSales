@@ -20,6 +20,22 @@ namespace eSales.Services.Services
            this.baseState = baseState;
         }
 
+        public override IQueryable<Proizvodi> AddFilter(IQueryable<Proizvodi> query, ProizvodiSearchObject? search = null)
+        {
+            var filteredQuery =  base.AddFilter(query, search);
+            if(!string.IsNullOrWhiteSpace(search?.FTS))
+            {
+                filteredQuery = filteredQuery.Where(x => x.Naziv.Contains(search.FTS) || x.Sifra.Contains(search.FTS));
+            }
+
+            if(!string.IsNullOrWhiteSpace(search?.Sifra))
+            {
+                filteredQuery = filteredQuery.Where(x => x.Sifra == search.Sifra);
+            }
+
+            return filteredQuery; 
+        }
+
         public override Task<Model.Proizvodi> Insert(ProizvodiInsertRequest insert)
         {
             var state = baseState.CreateState("initial");

@@ -8,5 +8,7 @@ namespace eSales.Model.SearchObjects
 {
     public class ProizvodiSearchObject : BaseSearchObject
     {
+        public string? FTS {  get; set; }  //Fulltext search
+        public string? Sifra {  get; set; }  
     }
 }
