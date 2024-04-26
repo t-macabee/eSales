@@ -4,9 +4,7 @@ import 'package:esales_admin/providers/product_provider.dart';
 import 'package:esales_admin/screens/product_details_screen.dart';
 import 'package:esales_admin/utils/util.dart';
 import 'package:esales_admin/widgets/master_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -71,8 +69,23 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   setState(() {
                     result = data;
                   });
+                  //print("data: ${data.result[0].naziv}");
                 },
-                child: Text("Pretraga"))
+                child: Text("Pretraga")),
+            SizedBox(
+              width: 8,
+            ),
+            ElevatedButton(
+                onPressed: () async {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetailScreen(
+                        product: null,
+                      ),
+                    ),
+                  );
+                },
+                child: Text("Dodaj"))
           ],
         ));
   }

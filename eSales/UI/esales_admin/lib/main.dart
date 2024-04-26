@@ -1,11 +1,18 @@
+import 'package:esales_admin/providers/jedinice_mjere_provider.dart';
 import 'package:esales_admin/providers/product_provider.dart';
+import 'package:esales_admin/providers/vrste_proizvoda_provider.dart';
 import 'package:esales_admin/utils/util.dart';
+import 'package:esales_admin/screens/product_list_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (_) => ProductProvider())],
+    providers: [
+      ChangeNotifierProvider(create: (_) => ProductProvider()),
+      ChangeNotifierProvider(create: (_) => JediniceMjereProvider()),
+      ChangeNotifierProvider(create: (_) => VrsteProizvodaProvider())
+    ],
     child: const MyMaterialApp(),
   ));
 }
@@ -189,6 +196,11 @@ class LoginPage extends StatelessWidget {
 
                       try {
                         await _productProvider.get();
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const ProductListScreen(),
+                          ),
+                        );
                       } on Exception catch (ex) {
                         showDialog(
                             context: context,
