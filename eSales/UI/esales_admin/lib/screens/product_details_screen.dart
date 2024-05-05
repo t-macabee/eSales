@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:esales_admin/models/jedinice_mjere.dart';
 import 'package:esales_admin/models/product.dart';
 import 'package:esales_admin/models/search_result.dart';
@@ -6,6 +9,7 @@ import 'package:esales_admin/providers/jedinice_mjere_provider.dart';
 import 'package:esales_admin/providers/product_provider.dart';
 import 'package:esales_admin/providers/vrste_proizvoda_provider.dart';
 import 'package:esales_admin/widgets/master_screen.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -90,17 +94,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     child: ElevatedButton(
                         onPressed: () async {
                           _formKey.currentState?.saveAndValidate();
+
                           print(_formKey.currentState?.value);
                           print(_formKey.currentState?.value['naziv']);
 
+                          var request =
+                              new Map.from(_formKey.currentState!.value);
+
+                          request['slika'] = _base64Image;
+
+                          print(request['slika']);
+
                           try {
                             if (widget.product == null) {
-                              await _productProvider
-                                  .insert(_formKey.currentState?.value);
+                              await _productProvider.insert(request);
                             } else {
                               await _productProvider.update(
-                                  widget.product!.proizvodId!,
-                                  _formKey.currentState?.value);
+                                  widget.product!.proizvodId!, request);
                             }
                           } on Exception catch (ex) {
                             showDialog(
@@ -206,8 +216,41 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
           ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: FormBuilderField(
+                name: 'imageId',
+                builder: (field) {
+                  return InputDecorator(
+                    decoration: InputDecoration(
+                        label: Text('Odaberi sliku'),
+                        errorText: field.errorText),
+                    child: ListTile(
+                      leading: Icon(Icons.photo),
+                      title: Text("Select image"),
+                      trailing: Icon(Icons.file_upload),
+                      onTap: getImage,
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
         )
       ]),
     );
+  }
+
+  File? _image;
+  String? _base64Image;
+
+  Future getImage() async {
+    var result = await FilePicker.platform.pickFiles(type: FileType.image);
+    if (result != null && result.files.single.path != null) {
+      _image = File(result.files.single.path!);
+      _base64Image = base64Encode(_image!.readAsBytesSync());
+    }
   }
 }

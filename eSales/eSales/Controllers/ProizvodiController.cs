@@ -31,5 +31,11 @@ namespace eSales.Controllers
         {
             return await (service as IProizvodiService).AllowedActions(id);
         }
+
+        [HttpGet("{id}/recommend")]
+        public virtual List<Model.Proizvodi> Recommend(int id)
+        {
+            return (service as IProizvodiService).Recommend(id);
+        }
     }
 }
